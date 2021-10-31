@@ -2,8 +2,17 @@ import { IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const LogoWrapper = styled("div")(({ theme }) => ({
-  padding: ".6rem 0",
-  width: "100px",
+  // padding: ".6rem 0",
+  width: "170px",
+
+  "& img": {
+    width: "100%",
+    height: "auto",
+  },
+
+  [theme.breakpoints.up("lg")]: {
+    width: "220px",
+  },
 }));
 
 export const linkStyle = {

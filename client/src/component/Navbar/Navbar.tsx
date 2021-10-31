@@ -10,7 +10,7 @@ import {
   LoginMenu,
   ShoppingCart,
 } from "./styles";
-import LogoImage from "../../images/logo/logo.png";
+import LogoImage from "../../images/logo/logo-change-background.jpg";
 import { Badge, Container, Menu, MenuItem } from "@mui/material";
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
@@ -47,7 +47,7 @@ export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ backgroundColor: "#aac6fe" }}>
-        <Container xs-p={0}>
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
             <LogoWrapper>
               <Link to="/">
@@ -95,14 +95,14 @@ export default function Navbar() {
                     Logout
                   </MenuItem>
                 ) : (
-                  <>
+                  <div>
                     <MenuItem sx={{ fontSize: ".8rem" }} onClick={handleClose}>
                       Login
                     </MenuItem>
                     <MenuItem sx={{ fontSize: ".8rem" }} onClick={handleClose}>
                       Register
                     </MenuItem>
-                  </>
+                  </div>
                 )}
               </Menu>
             </LoginMenu>

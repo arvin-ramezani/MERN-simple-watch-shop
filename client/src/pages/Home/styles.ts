@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
 
 export const HeroSection = styled("div")(({ theme }) => ({
-  marginTop: "100px",
+  marginTop: "85px",
   width: "100%",
   height: "auto",
 }));
