@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { IUser } from "../interfaces/IUser";
+import mongoose, { Schema, model } from 'mongoose';
+import { IUser } from '../interfaces/IUser';
 
 const userSchema = new Schema<IUser>(
   {
@@ -18,4 +18,7 @@ const userSchema = new Schema<IUser>(
   { timestamps: true }
 );
 
-export default model<IUser>("User", userSchema);
+// DeprecationWarning for mongoose 7.
+mongoose.set('strictQuery', true);
+
+export default model<IUser>('User', userSchema);

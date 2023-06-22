@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import bcryptjs from "bcryptjs";
-import User from "../models/User.model";
-import { ObjectId } from "mongoose";
-import redisClient from "../redisClient";
+import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+import bcryptjs from 'bcryptjs';
+import User from '../models/User.model';
+import mongoose from 'mongoose';
+import { redisClient } from '../redisClient';
 
 // Register
 export const register = async (req: Request, res: Response) => {
@@ -11,7 +11,7 @@ export const register = async (req: Request, res: Response) => {
     const existingUser = await User.findOne({ username: req.body.username });
 
     if (existingUser)
-      return res.status(400).json({ message: "User Already Registered" });
+      return res.status(400).json({ message: 'User Already Registered' });
 
     const hashedPassword = await bcryptjs.hash(req.body.password, 12);
 
@@ -20,12 +20,12 @@ export const register = async (req: Request, res: Response) => {
     const createdUser = await newUser.save();
 
     const accessToken = generateAccessToken(
-      createdUser._id,
+      createdUser._id.toString(),
       createdUser.isAdmin
     );
 
     const refreshToken = generateRefreshToken(
-      createdUser._id,
+      createdUser._id.toString(),
       createdUser.isAdmin
     );
 
@@ -54,15 +54,15 @@ export const login = async (req: Request, res: Response) => {
       );
 
       if (!isCurrectPassword)
-        return res.status(400).json({ message: "Password Is Not Correct" });
+        return res.status(400).json({ message: 'Password Is Not Correct' });
 
       const accessToken = generateAccessToken(
-        existingUser?._id,
+        existingUser?._id.toString(),
         existingUser?.isAdmin
       );
 
       const refreshToken = generateRefreshToken(
-        existingUser?._id,
+        existingUser?._id.toString(),
         existingUser?.isAdmin
       );
 
@@ -76,17 +76,14 @@ export const login = async (req: Request, res: Response) => {
 };
 
 // Access Token
-export const generateAccessToken = (
-  id: ObjectId,
-  isAdmin: boolean | undefined
-) =>
+export const generateAccessToken = (id: string, isAdmin: boolean | undefined) =>
   jwt.sign({ id, isAdmin }, `${process.env.ACCESS_TOKEN_SEC_KEY}`, {
     expiresIn: `${process.env.ACCESS_TOKEN_EXP_TIME}`,
   });
 
 // Refresh Token
 export const generateRefreshToken = (
-  id: ObjectId,
+  id: string,
   isAdmin: boolean | undefined
 ) => {
   const refreshToken = jwt.sign(

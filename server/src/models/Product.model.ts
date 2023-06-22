@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import IProduct from "../interfaces/IProduct";
 
 const productSchema = new Schema<IProduct>({
@@ -8,5 +8,8 @@ const productSchema = new Schema<IProduct>({
   price: { type: Number, required: true },
   categories: { type: [String], required: true },
 });
+
+// DeprecationWarning for mongoose 7.
+mongoose.set('strictQuery', true);
 
 export default model<IProduct>("Product", productSchema);
