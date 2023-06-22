@@ -1,7 +1,7 @@
-import { Box } from "@mui/system";
-import React, { FC, useEffect, useState } from "react";
-import { useForm, Controller, FieldValues, FormState } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { Box } from '@mui/system';
+import React, { FC, useEffect, useState } from 'react';
+import { useForm, Controller, FieldValues, FormState } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
   Checkbox,
@@ -13,7 +13,7 @@ import {
   OutlinedInput,
   TextField,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 import {
   Background,
   RegisterContainer,
@@ -21,19 +21,19 @@ import {
   Form,
   PasswordHelperText,
   SubmitButton,
-} from "./styles";
-import { loginSchema, registerSchema } from "./yupSchema";
-import { ArrowBack, Visibility, VisibilityOff } from "@mui/icons-material";
+} from './styles';
+import { loginSchema, registerSchema } from './yupSchema';
+import { ArrowBack, Visibility, VisibilityOff } from '@mui/icons-material';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import {
   loginAsync,
   registerAsync,
   selectUserStatus,
-} from "../../features/user/userSlice";
-import { IRegister } from "../../interfaces/interfaces";
-import { ILogin } from "../../interfaces/interfaces";
-import { Link } from "react-router-dom";
+} from '../../features/user/userSlice';
+import { IRegister } from '../../interfaces/interfaces';
+import { ILogin } from '../../interfaces/interfaces';
+import { Link } from 'react-router-dom';
 
 const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
   const dispatch = useDispatch();
@@ -76,32 +76,43 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
   return (
     <Background>
       <RegisterContainer
-        sx={{ opacity: userStatus === "loading" ? ".5" : "1" }}
+        sx={{ opacity: userStatus === 'loading' ? '.5' : '1' }}
       >
         <GoBack startIcon={<ArrowBack />}>
-          <Link to="/">Go Back</Link>
+          <Link to='/'>Go Back</Link>
         </GoBack>
         {isRegister ? (
           <>
-            <Typography mt={4} variant="h5">
+            <Typography
+              mt={4}
+              variant='h5'
+            >
               CREATE AN ACCOUNT
             </Typography>
-            <Typography my={3} color="GrayText" variant="subtitle2">
+            <Typography
+              my={3}
+              color='GrayText'
+              variant='subtitle2'
+            >
               In this form I used<b> react-hook-form & yup</b> for validation.
             </Typography>
             <Form onSubmit={handleSubmit(submitHandler)}>
               <Controller
-                name="firstname"
-                defaultValue=""
+                name='firstname'
+                defaultValue=''
                 control={control}
                 render={({ field }) => (
-                  <FormControl fullWidth variant="outlined" {...field}>
+                  <FormControl
+                    fullWidth
+                    variant='outlined'
+                    {...field}
+                  >
                     <TextField
-                      margin="normal"
-                      name="firstname"
-                      size="small"
-                      id="firstName"
-                      label="First Name"
+                      margin='normal'
+                      name='firstname'
+                      size='small'
+                      id='firstName'
+                      label='First Name'
                       error={!!errors.firstname}
                       helperText={
                         errors.firstname ? errors.firstname?.message : null
@@ -111,17 +122,21 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
                 )}
               />
               <Controller
-                name="lastname"
+                name='lastname'
                 control={control}
-                defaultValue=""
+                defaultValue=''
                 render={({ field }) => (
-                  <FormControl fullWidth {...field} variant="outlined">
+                  <FormControl
+                    fullWidth
+                    {...field}
+                    variant='outlined'
+                  >
                     <TextField
-                      margin="normal"
-                      size="small"
-                      name="lastname"
-                      id="lastName"
-                      label="Last Name"
+                      margin='normal'
+                      size='small'
+                      name='lastname'
+                      id='lastName'
+                      label='Last Name'
                       error={!!errors.lastname}
                       helperText={
                         errors.lastname ? errors.lastname.message : null
@@ -132,16 +147,20 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
               />
               <Controller
                 control={control}
-                name="username"
-                defaultValue=""
+                name='username'
+                defaultValue=''
                 render={({ field }) => (
-                  <FormControl fullWidth variant="outlined" {...field}>
+                  <FormControl
+                    fullWidth
+                    variant='outlined'
+                    {...field}
+                  >
                     <TextField
-                      margin="normal"
-                      size="small"
-                      name="username"
-                      id="userName"
-                      label="Username"
+                      margin='normal'
+                      size='small'
+                      name='username'
+                      id='userName'
+                      label='Username'
                       error={!!errors.username}
                       helperText={
                         errors.username ? errors.username.message : null
@@ -152,16 +171,20 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
               />
               <Controller
                 control={control}
-                name="email"
-                defaultValue=""
+                name='email'
+                defaultValue=''
                 render={({ field }) => (
-                  <FormControl fullWidth variant="outlined" {...field}>
+                  <FormControl
+                    fullWidth
+                    variant='outlined'
+                    {...field}
+                  >
                     <TextField
-                      margin="normal"
-                      size="small"
-                      name="email"
-                      id="email"
-                      label="Email"
+                      margin='normal'
+                      size='small'
+                      name='email'
+                      id='email'
+                      label='Email'
                       error={!!errors.email}
                       helperText={errors.email ? errors.email.message : null}
                     />
@@ -170,29 +193,36 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
               />
               <Controller
                 control={control}
-                name="password"
-                defaultValue=""
+                name='password'
+                defaultValue=''
                 render={({ field }) => (
-                  <FormControl fullWidth variant="outlined" {...field}>
-                    <InputLabel htmlFor="password" variant="outlined">
+                  <FormControl
+                    fullWidth
+                    variant='outlined'
+                    {...field}
+                  >
+                    <InputLabel
+                      htmlFor='password'
+                      variant='outlined'
+                    >
                       Password
                     </InputLabel>
                     <OutlinedInput
-                      id="password"
-                      type={showPassword ? "text" : "password"}
+                      id='password'
+                      type={showPassword ? 'text' : 'password'}
                       error={!!errors.password}
                       endAdornment={
-                        <InputAdornment position="end">
+                        <InputAdornment position='end'>
                           <IconButton
-                            aria-label="toggle password visibility"
+                            aria-label='toggle password visibility'
                             onClick={handleClickShowPassword}
-                            edge="end"
+                            edge='end'
                           >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
                       }
-                      label="Password"
+                      label='Password'
                     />
                     <PasswordHelperText>
                       {errors.password ? errors.password.message : null}
@@ -202,17 +232,21 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
               />
               <Controller
                 control={control}
-                name="confirmPassword"
-                defaultValue=""
+                name='confirmPassword'
+                defaultValue=''
                 render={({ field }) => (
-                  <FormControl fullWidth variant="outlined" {...field}>
+                  <FormControl
+                    fullWidth
+                    variant='outlined'
+                    {...field}
+                  >
                     <TextField
-                      type="password"
-                      margin="normal"
-                      size="small"
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      label="Confirm Password"
+                      type='password'
+                      margin='normal'
+                      size='small'
+                      name='confirmPassword'
+                      id='confirmPassword'
+                      label='Confirm Password'
                       error={!!errors.confirmPassword}
                       helperText={
                         errors.confirmPassword
@@ -223,21 +257,21 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
                   </FormControl>
                 )}
               />
-              <SubmitButton type="submit">Click To See</SubmitButton>
+              <SubmitButton type='submit'>Register</SubmitButton>
             </Form>
             <Button
-              color="inherit"
+              color='inherit'
               sx={{
-                textDecoration: "underline",
-                textAlign: "left",
-                margin: "1rem 2.6rem 0",
-                fontWeight: "400",
-                fontSize: ".7rem",
-                letterSpacing: "1px",
-                alignSelf: "flex-start",
-                padding: "4px 6px",
+                textDecoration: 'underline',
+                textAlign: 'left',
+                margin: '1rem 2.6rem 0',
+                fontWeight: '400',
+                fontSize: '.7rem',
+                letterSpacing: '1px',
+                alignSelf: 'flex-start',
+                padding: '4px 6px',
               }}
-              variant="text"
+              variant='text'
               onClick={handleRegisterComponent}
             >
               ALREADY HAVE AN ACCOUNT ?
@@ -245,61 +279,70 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
           </>
         ) : (
           <>
-            <Typography my={2} variant="h5">
+            <Typography
+              my={2}
+              variant='h5'
+            >
               LOGIN
             </Typography>
-            <Typography color="GrayText" variant="subtitle2">
+            <Typography
+              color='GrayText'
+              variant='subtitle2'
+            >
               In this form I used<b> react-hook-form & yup</b> for validation.
             </Typography>
             <Form onSubmit={handleSubmit(submitHandler)}>
               <Controller
                 control={control}
-                name="username"
-                defaultValue=""
+                name='username'
+                defaultValue=''
                 render={({ field }) => (
                   <FormControl
-                    margin="normal"
+                    margin='normal'
                     fullWidth
                     {...field}
-                    variant="outlined"
+                    variant='outlined'
                     error={!!errors.username}
                   >
                     <TextField
                       helperText={
                         errors.username ? errors.username.message : null
                       }
-                      id="username"
-                      label="Username"
-                      name="username"
+                      id='username'
+                      label='Username'
+                      name='username'
                     />
                   </FormControl>
                 )}
               />
               <Controller
                 control={control}
-                name="password"
-                defaultValue=""
+                name='password'
+                defaultValue=''
                 render={({ field }) => (
                   <FormControl
                     {...field}
-                    margin="normal"
+                    margin='normal'
                     fullWidth
-                    variant="outlined"
+                    variant='outlined'
                   >
-                    <InputLabel htmlFor="password" variant="outlined">
+                    <InputLabel
+                      htmlFor='password'
+                      variant='outlined'
+                    >
                       Password
                     </InputLabel>
                     <OutlinedInput
-                      type={showPassword ? "text" : "password"}
-                      id="password"
-                      label="Password"
-                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      id='password'
+                      label='Password'
+                      name='password'
                       endAdornment={
-                        <InputAdornment position="end">
+                        <InputAdornment position='end'>
                           <IconButton
-                            aria-label="toggle password visibility"
+                            aria-label='toggle password visibility'
                             onClick={handleClickShowPassword}
-                            edge="end"
+                            edge='end'
                           >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
@@ -313,31 +356,36 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
                 )}
               />
               <FormControlLabel
-                control={<Checkbox {...register("isAdmin")} defaultChecked />}
-                label="Login As Admin(for test)"
+                control={
+                  <Checkbox
+                    {...register('isAdmin')}
+                    defaultChecked
+                  />
+                }
+                label='Login As Admin(for test)'
               />
 
-              <SubmitButton type="submit">Click To See</SubmitButton>
+              <SubmitButton type='submit'>Login</SubmitButton>
               <Box>
                 <Button
-                  color="inherit"
+                  color='inherit'
                   sx={{
-                    textDecoration: "underline",
-                    textAlign: "left",
-                    margin: "1rem 0",
-                    fontWeight: "400",
-                    fontSize: ".7rem",
-                    letterSpacing: "1px",
+                    textDecoration: 'underline',
+                    textAlign: 'left',
+                    margin: '1rem 0',
+                    fontWeight: '400',
+                    fontSize: '.7rem',
+                    letterSpacing: '1px',
                   }}
-                  variant="text"
+                  variant='text'
                   disabled
                 >
                   DO NOT REMEMBER YOUR PASSWORD ?
                 </Button>
                 <Button
-                  color="inherit"
-                  sx={{ textDecoration: "underline" }}
-                  variant="text"
+                  color='inherit'
+                  sx={{ textDecoration: 'underline' }}
+                  variant='text'
                   onClick={handleRegisterComponent}
                 >
                   CREATE NEW ACCOUNT
