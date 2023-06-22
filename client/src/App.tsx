@@ -1,19 +1,19 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import Home from "./pages/Home/Home";
-import ProductList from "./pages/ProductList/ProductList";
-import Login from "./pages/Login/Login";
-import { useSelector } from "react-redux";
-import { selectUser } from "./features/user/userSlice";
-import Cart from "./pages/Cart/Cart";
-import { API, refreshTokenApi } from "./Api/tokenApi";
-import jwt_decode from "jwt-decode";
-import { IJWTAccessToken, ITokens } from "./interfaces/interfaces";
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import jwt_decode from 'jwt-decode';
+
+import Home from './pages/Home/Home';
+import ProductList from './pages/ProductList/ProductList';
+import Login from './pages/Login/Login';
+import { selectUser } from './features/user/userSlice';
+import Cart from './pages/Cart/Cart';
+import { API, refreshTokenApi } from './Api/tokenApi';
+import { IJWTAccessToken, ITokens } from './interfaces/interfaces';
 
 function App() {
   const user = useSelector(selectUser);
@@ -59,19 +59,19 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/cart">
-          {!user ? <Redirect to="/login" /> : <Cart />}
+        <Route path='/cart'>
+          {!user ? <Redirect to='/login' /> : <Cart />}
         </Route>
-        <Route path="/register">
-          {user ? <Redirect to="/" /> : <Login Register />}
+        <Route path='/register'>
+          {user ? <Redirect to='/' /> : <Login Register />}
         </Route>
-        <Route path="/login">
-          {user ? <Redirect to="/" /> : <Login Register={false} />}
+        <Route path='/login'>
+          {user ? <Redirect to='/' /> : <Login Register={false} />}
         </Route>
-        <Route path={["/products/:category", "/products"]}>
+        <Route path={['/products/:category', '/products']}>
           <ProductList />
         </Route>
-        <Route path="/">
+        <Route path='/'>
           <Home />
         </Route>
       </Switch>

@@ -1,7 +1,8 @@
-import React, { FC, useState } from "react";
-import { IProduct } from "../../interfaces/interfaces";
-import TransitionsModal from "../Modal/Modal";
-import { Wrapper, Image, Info, Desc, Categories } from "./styles";
+import { FC, useState } from 'react';
+
+import { IProduct } from '../../interfaces/interfaces';
+import TransitionsModal from '../Modal/Modal';
+import { Wrapper, Image, Info, Desc, Categories } from './styles';
 
 const Product: FC<IProduct> = ({ img, name, desc, price, categories, _id }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -11,7 +12,10 @@ const Product: FC<IProduct> = ({ img, name, desc, price, categories, _id }) => {
   return (
     <>
       <Wrapper onClick={handleModal}>
-        <Image src={img} alt={name} />
+        <Image
+          src={img}
+          alt={name}
+        />
         <Info>
           <h3>{name}</h3>
           <Desc>{desc}</Desc>
@@ -19,7 +23,7 @@ const Product: FC<IProduct> = ({ img, name, desc, price, categories, _id }) => {
           <Categories>
             Categories:
             {categories?.map((cat) => (
-              <span key={cat}>{cat} </span>
+              <span key={cat}>#{cat} </span>
             ))}
           </Categories>
         </Info>

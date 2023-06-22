@@ -1,5 +1,9 @@
-import { Add, Cancel, Remove } from "@mui/icons-material";
-import { Button, Chip, IconButton, Typography } from "@mui/material";
+import { Add, Cancel, Remove } from '@mui/icons-material';
+import { Button, Chip, IconButton, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { VariantType, useSnackbar } from 'notistack';
+
 import {
   Wrapper,
   CloseButton,
@@ -9,20 +13,18 @@ import {
   AddToCart,
   Quantity,
   Categories,
-} from "./styles";
-import React, { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { RootState } from "../../app/store";
-import { addToCart } from "../../features/cart/cartSlice";
-import { VariantType, useSnackbar } from "notistack";
-import { IProductModalProps } from "../../interfaces/interfaces";
+} from './styles';
+import React, { FC, useState } from 'react';
+import { RootState } from '../../app/store';
+import { addToCart } from '../../features/cart/cartSlice';
+import { IProductModalProps } from '../../interfaces/interfaces';
 
-const ProductModal: FC<IProductModalProps> = ({ setOpenModal, product }) => {
-  // product Props
-  let { img, name, desc, price, categories, _id } = product;
-
+const ProductModal: FC<IProductModalProps> = ({
+  setOpenModal,
+  product: { img, name, desc, price, categories, _id },
+}) => {
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
   const { enqueueSnackbar } = useSnackbar();
 
   const isCartInProduct = useSelector((state: RootState) =>
@@ -31,13 +33,11 @@ const ProductModal: FC<IProductModalProps> = ({ setOpenModal, product }) => {
 
   const user = useSelector((state: RootState) => state.user.userInfo);
 
-  const [quantity, setQuantity] = useState(1);
-
   const quantityHandler = (type: string) => {
-    if (type === "inc") {
+    if (type === 'inc') {
       setQuantity((quantity) => quantity + 1);
     }
-    if (type === "dec") {
+    if (type === 'dec') {
       quantity > 1 && setQuantity((quantity) => quantity - 1);
     }
   };
@@ -48,7 +48,7 @@ const ProductModal: FC<IProductModalProps> = ({ setOpenModal, product }) => {
     if (isCartInProduct) {
       enqueueSnackbar(
         `You Added This Product Before. Please Edit Quantity Or Remove ${user?.firstname}`,
-        { variant: "error" }
+        { variant: 'error' }
       );
 
       return;
@@ -72,7 +72,10 @@ const ProductModal: FC<IProductModalProps> = ({ setOpenModal, product }) => {
 
   return (
     <Wrapper>
-      <CloseButton color="primary" onClick={CloseModalHandler}>
+      <CloseButton
+        color='primary'
+        onClick={CloseModalHandler}
+      >
         <Cancel />
       </CloseButton>
       <Image src={img} />
@@ -89,32 +92,39 @@ const ProductModal: FC<IProductModalProps> = ({ setOpenModal, product }) => {
         </Categories>
       </Info>
       <AddToCart>
-        <Typography gutterBottom color="darkgreen" variant="subtitle1">
+        <Typography
+          gutterBottom
+          color='darkgreen'
+          variant='subtitle1'
+        >
           Total= {quantity * price}
         </Typography>
         <Quantity>
-          <IconButton onClick={() => quantityHandler("dec")}>
+          <IconButton onClick={() => quantityHandler('dec')}>
             <Remove />
           </IconButton>
           <Chip
-            sx={{ fontSize: "1rem", fontWeight: "bold" }}
+            sx={{ fontSize: '1rem', fontWeight: 'bold' }}
             label={quantity}
-            variant="outlined"
+            variant='outlined'
           />
-          <IconButton onClick={() => quantityHandler("inc")}>
+          <IconButton onClick={() => quantityHandler('inc')}>
             <Add />
           </IconButton>
         </Quantity>
         <Button
-          onClick={() => addToCartHandler("success")}
+          onClick={() => addToCartHandler('success')}
           disabled={!user}
-          sx={{ marginTop: "1.4rem" }}
-          variant="contained"
+          sx={{ marginTop: '1.4rem' }}
+          variant='contained'
         >
           Add To Cart
         </Button>
         {!user && (
-          <Link to="/login" style={{ marginTop: "1.4rem" }}>
+          <Link
+            to='/login'
+            style={{ marginTop: '1.4rem' }}
+          >
             Please Login First
           </Link>
         )}

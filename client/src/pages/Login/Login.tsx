@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useForm, Controller, FieldValues, FormState } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -14,6 +14,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { ArrowBack, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Background,
   RegisterContainer,
@@ -23,9 +27,6 @@ import {
   SubmitButton,
 } from './styles';
 import { loginSchema, registerSchema } from './yupSchema';
-import { ArrowBack, Visibility, VisibilityOff } from '@mui/icons-material';
-
-import { useDispatch, useSelector } from 'react-redux';
 import {
   loginAsync,
   registerAsync,
@@ -33,27 +34,12 @@ import {
 } from '../../features/user/userSlice';
 import { IRegister } from '../../interfaces/interfaces';
 import { ILogin } from '../../interfaces/interfaces';
-import { Link } from 'react-router-dom';
 
 const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
   const dispatch = useDispatch();
-
   const userStatus = useSelector(selectUserStatus);
-
-  // handle visibility of password
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () =>
-    setShowPassword((showPassword) => !showPassword);
-
   const [isRegister, setIsRegister] = useState<boolean>(false);
-  const handleRegisterComponent = () =>
-    setIsRegister((isRegister) => !isRegister);
-
-  useEffect(() => {
-    Register && setIsRegister(true);
-  }, [Register]);
-
-  // useForm Library
   const {
     control,
     handleSubmit,
@@ -62,6 +48,16 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
   } = useForm({
     resolver: yupResolver(isRegister ? registerSchema : loginSchema),
   });
+
+  const handleClickShowPassword = () =>
+    setShowPassword((showPassword) => !showPassword);
+
+  const handleRegisterComponent = () =>
+    setIsRegister((isRegister) => !isRegister);
+
+  useEffect(() => {
+    Register && setIsRegister(true);
+  }, [Register]);
 
   const submitHandler = (
     data: FormState<FieldValues> & (IRegister | ILogin)
@@ -78,8 +74,10 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
       <RegisterContainer
         sx={{ opacity: userStatus === 'loading' ? '.5' : '1' }}
       >
-        <GoBack startIcon={<ArrowBack />}>
-          <Link to='/'>Go Back</Link>
+        <GoBack>
+          <Link to='/'>
+            <ArrowBack /> Go Back
+          </Link>
         </GoBack>
         {isRegister ? (
           <>
@@ -280,7 +278,7 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
         ) : (
           <>
             <Typography
-              my={2}
+              my={4}
               variant='h5'
             >
               LOGIN

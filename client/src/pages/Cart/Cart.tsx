@@ -1,4 +1,9 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import {
   CartContainer,
   CartTop,
@@ -8,17 +13,13 @@ import {
   CartListContainer,
   SummaryContainer,
   SummaryButton,
-} from "./styles";
-import { Box } from "@mui/system";
-import React, { FC } from "react";
-import Navbar from "../../component/Navbar/Navbar";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
-import CartItem from "../../component/CartItem/CartItem";
-import { selectCart } from "../../features/cart/cartSlice";
-import { Link } from "react-router-dom";
-import { API } from "../../Api/tokenApi";
-import { selectUser } from "../../features/user/userSlice";
+} from './styles';
+import Navbar from '../../component/Navbar/Navbar';
+import { RootState } from '../../app/store';
+import CartItem from '../../component/CartItem/CartItem';
+import { selectCart } from '../../features/cart/cartSlice';
+import { API } from '../../Api/tokenApi';
+import { selectUser } from '../../features/user/userSlice';
 
 const Cart: FC = () => {
   const { cartProducts, cartQuantity } = useSelector(selectCart);
@@ -28,10 +29,9 @@ const Cart: FC = () => {
   const checkoutHandler = async () => {
     try {
       if (user) {
-        const res = await API.post("/", "", {
+        await API.post('/', '', {
           headers: { Authorization: `Bearer ${user.accessToken}` },
         });
-        console.log(res.data);
       }
     } catch (error) {
       console.log(error);
@@ -42,23 +42,38 @@ const Cart: FC = () => {
     <>
       <Navbar />
       <CartContainer>
-        <Typography variant="h4" align="center">
+        <Typography
+          variant='h4'
+          align='center'
+        >
           Your Bag
         </Typography>
         <CartTop>
-          <Button size="small" color="inherit" variant="outlined">
-            <Link to="/products">Continue Shopping</Link>
+          <Button
+            size='small'
+            color='inherit'
+            variant='outlined'
+          >
+            <Link to='/products'>Continue Shopping</Link>
           </Button>
           <CartTopLinks>
-            <Button variant="text">Shopping Bag (2)</Button>
-            <Button variant="text">Your Wishlist (0)</Button>
+            <Button variant='text'>Shopping Bag (2)</Button>
+            <Button variant='text'>Your Wishlist (0)</Button>
           </CartTopLinks>
-          <CheckoutButton size="small" variant="contained">
+          <CheckoutButton
+            size='small'
+            variant='contained'
+          >
             Checkout Now
           </CheckoutButton>
         </CartTop>
         {!cartQuantity ? (
-          <Typography variant="h4" align="center" color="darkred" mt={5}>
+          <Typography
+            variant='h4'
+            align='center'
+            color='darkred'
+            mt={5}
+          >
             Your Cart Is Empty
           </Typography>
         ) : (
@@ -78,34 +93,50 @@ const Cart: FC = () => {
             </CartListContainer>
 
             <SummaryContainer>
-              <Typography variant="h5" align="center" mb={2}>
+              <Typography
+                variant='h5'
+                align='center'
+                mb={2}
+              >
                 ORDER SUMMARY
               </Typography>
 
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="subtitle1">Subtotal</Typography>
+              <Box
+                display='flex'
+                justifyContent='space-between'
+              >
+                <Typography variant='subtitle1'>Subtotal</Typography>
                 <Typography>$ {totalPrice}</Typography>
               </Box>
 
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="subtitle1">Estimated Shipping</Typography>
+              <Box
+                display='flex'
+                justifyContent='space-between'
+              >
+                <Typography variant='subtitle1'>Estimated Shipping</Typography>
                 <Typography>$5.90</Typography>
               </Box>
 
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="subtitle1">Shipping Discount</Typography>
+              <Box
+                display='flex'
+                justifyContent='space-between'
+              >
+                <Typography variant='subtitle1'>Shipping Discount</Typography>
                 <Typography>$-5.90</Typography>
               </Box>
 
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="h6">Total</Typography>
-                <Typography variant="h6">{totalPrice}</Typography>
+              <Box
+                display='flex'
+                justifyContent='space-between'
+              >
+                <Typography variant='h6'>Total</Typography>
+                <Typography variant='h6'>{totalPrice}</Typography>
               </Box>
 
               <SummaryButton
                 onClick={checkoutHandler}
                 fullWidth
-                variant="contained"
+                variant='contained'
               >
                 Checkout Now
               </SummaryButton>
