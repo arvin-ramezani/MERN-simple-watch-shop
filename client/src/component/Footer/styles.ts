@@ -12,7 +12,6 @@ export const Container = styled(Grid)(({ theme }) => ({
 
 export const AboutUs = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
-    // margin: "1rem 0 0 4rem",
     margin: '1rem auto',
 
     '& .MuiTypography-root': {
@@ -24,7 +23,7 @@ export const AboutUs = styled(Grid)(({ theme }) => ({
 export const Form = styled('form')(({ theme }) => ({
   width: '70%',
   background: '#a6c4ff',
-  padding: '0.5rem 2rem',
+  padding: '1rem 2rem',
   borderRadius: '10px',
 
   '& .MuiButton-root': {

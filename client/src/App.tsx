@@ -31,13 +31,13 @@ function App() {
       if (user) {
         try {
           const { exp } = jwt_decode<IJWTAccessToken>(user.accessToken);
-          // console.log(decoded);
+
           if (exp < (new Date().getTime() + 1) / 1000) {
             let tokens = await getAccessToken({
               accessToken: user.accessToken,
               refreshToken: user.refreshToken,
             });
-            console.log(tokens);
+
             if (tokens && config.headers) {
               console.log(config);
               config.headers = {

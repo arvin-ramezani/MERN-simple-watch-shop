@@ -6,7 +6,7 @@ import Fade from '@mui/material/Fade';
 
 import ProductModal from '../ProductModal/ProductModal';
 import { IModalProps } from '../../interfaces/interfaces';
-import { style } from './styles';
+import { ModalContent, style } from './styles';
 
 const TransitionsModal: React.FC<IModalProps> = ({
   openModal,
@@ -29,12 +29,16 @@ const TransitionsModal: React.FC<IModalProps> = ({
         }}
       >
         <Fade in={openModal}>
-          <Box sx={style}>
+          <ModalContent
+            p={3}
+            bgcolor={'background.paper'}
+            boxShadow={24}
+          >
             <ProductModal
               setOpenModal={setOpenModal}
               product={product}
             />
-          </Box>
+          </ModalContent>
         </Fade>
       </Modal>
     </div>

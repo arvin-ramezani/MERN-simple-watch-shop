@@ -41,6 +41,7 @@ const ProductList: FC = () => {
   return (
     <div>
       <Navbar />
+
       <FilterBlock>
         <Button
           variant='contained'

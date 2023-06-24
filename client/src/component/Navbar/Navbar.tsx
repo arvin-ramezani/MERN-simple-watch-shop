@@ -17,12 +17,13 @@ import {
   LoginMenu,
   ShoppingCart,
   menuLinkStyle,
+  CustomDialog,
 } from './styles';
 import LogoImage from '../../assets/images/logo/logo-change-background.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, selectUser } from '../../features/user/userSlice';
 import { persistor } from '../../app/store';
-import { selectCart } from '../../features/cart/cartSlice';
+import { clearCart, selectCart } from '../../features/cart/cartSlice';
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ export default function Navbar() {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    dispatch(clearCart());
     persistor.purge();
+
     handleClose();
     history.push('/');
   };
@@ -154,7 +157,7 @@ export default function Navbar() {
               </Link>
             </ShoppingCart>
           </Toolbar>
-          <Dialog
+          <CustomDialog
             open={showLogoutModal}
             onClose={() => setShowLogoutModal(false)}
             aria-labelledby='alert-dialog-title'
@@ -175,7 +178,7 @@ export default function Navbar() {
                 Logout
               </Button>
             </DialogActions>
-          </Dialog>
+          </CustomDialog>
         </Container>
       </AppBar>
     </Box>

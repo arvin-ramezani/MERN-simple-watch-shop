@@ -18,7 +18,12 @@ export const CartTop = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(3),
 
   '& .MuiButton-root': {
-    borderRadius: 0,
+    // border: '1px solid #000',
+  },
+
+  '& .MuiButton-root:hover': {
+    color: '#fff',
+    border: 'none',
   },
 
   '& > button > a': {
@@ -64,11 +69,10 @@ export const Wrapper = styled('div')(({ theme }) => ({
 }));
 
 export const CartListContainer = styled('div')(({ theme }) => ({
-  backgroundColor: '#fff',
-
   margin: '3rem 0',
 
   [theme.breakpoints.up('md')]: {
+    margin: 0,
     padding: theme.spacing(3),
     width: '75%',
   },
@@ -82,6 +86,10 @@ export const SummaryContainer = styled(Paper)(({ theme }) => ({
 
   '& div': {
     marginBottom: theme.spacing(1.5),
+  },
+
+  [theme.breakpoints.up('md')]: {
+    margin: '1.4rem auto 0',
   },
 }));
 

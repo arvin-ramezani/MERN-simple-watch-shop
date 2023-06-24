@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/material';
+import { Dialog, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 
 export const LogoWrapper = styled('div')(({ theme }) => ({
@@ -74,5 +74,11 @@ export const ShoppingCart = styled(IconButton)(({ theme }) => ({
     [theme.breakpoints.up('md')]: {
       fontSize: '2.2rem',
     },
+  },
+}));
+
+export const CustomDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiButton-root:hover': {
+    color: '#fff',
   },
 }));

@@ -29,10 +29,15 @@ export const RegisterContainer = styled('div')(({ theme }) => ({
   padding: '1rem',
   backgroundColor: '#e4ecee',
 
+  '& .MuiButton-root:hover, .MuiIconButton-root:hover': {
+    color: '#fff',
+  },
+
   [theme.breakpoints.down('sm')]: {
     margin: 'auto',
     maxWidth: '280px',
   },
+
   [theme.breakpoints.up('sm')]: {
     margin: 'auto',
     '& .MuiFormControl-fullWidth': {

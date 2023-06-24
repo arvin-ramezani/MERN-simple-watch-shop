@@ -62,8 +62,6 @@ const Login: FC<{ Register: boolean | null }> = ({ Register }) => {
   const submitHandler = (
     data: FormState<FieldValues> & (IRegister | ILogin)
   ) => {
-    console.log(data, isRegister);
-
     isRegister
       ? dispatch(registerAsync(data as IRegister))
       : dispatch(loginAsync(data as ILogin));

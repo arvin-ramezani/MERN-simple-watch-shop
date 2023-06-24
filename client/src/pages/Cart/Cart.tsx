@@ -41,6 +41,7 @@ const Cart: FC = () => {
   return (
     <>
       <Navbar />
+
       <CartContainer>
         <Typography
           variant='h4'

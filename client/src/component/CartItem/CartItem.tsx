@@ -23,6 +23,8 @@ import {
   EditCart,
   RemoveButton,
   editModeStyles,
+  CustomDialog,
+  EditCartBlock,
 } from './styles';
 import { editCartItem, removeFromCart } from '../../features/cart/cartSlice';
 import { ICartItemProps } from '../../interfaces/interfaces';
@@ -45,10 +47,10 @@ const CartItem: FC<ICartItemProps> = ({ img, _id, price, name, desc, qty }) => {
   const handleOpenRemoveModal = () => setOpenRemoveModal(true);
 
   const handleRemoveItem = (type: string) => {
-    if (type === 'cancel') {
-      setOpenRemoveModal(false);
-    } else {
+    if (type === 'remove') {
       dispatch(removeFromCart(_id));
+    } else {
+      setOpenRemoveModal(false);
     }
   };
 
@@ -84,7 +86,7 @@ const CartItem: FC<ICartItemProps> = ({ img, _id, price, name, desc, qty }) => {
         </ProductDetails>
       </ProductWrapper>
       <ProductAmount>
-        <div>
+        <EditCartBlock>
           <ProductPrice style={isEdit ? editModeStyles : {}}>
             ${isEdit ? `${quantity * price}` : `${qty * price}`}
           </ProductPrice>
@@ -104,7 +106,7 @@ const CartItem: FC<ICartItemProps> = ({ img, _id, price, name, desc, qty }) => {
           >
             <AddSharp />
           </IconButton>
-        </div>
+        </EditCartBlock>
         <EditCart
           onClick={() => handleEdit('edit')}
           variant={isEdit ? 'contained' : 'outlined'}
@@ -128,7 +130,7 @@ const CartItem: FC<ICartItemProps> = ({ img, _id, price, name, desc, qty }) => {
       >
         Remove
       </RemoveButton>
-      <Dialog
+      <CustomDialog
         open={openRemoveModal}
         onClose={handleRemoveItem}
         aria-labelledby='alert-dialog-title'
@@ -149,7 +151,7 @@ const CartItem: FC<ICartItemProps> = ({ img, _id, price, name, desc, qty }) => {
             Remove
           </Button>
         </DialogActions>
-      </Dialog>
+      </CustomDialog>
     </Wrapper>
   );
 };
